@@ -30,11 +30,13 @@ function ProfileDAO(db) {
     const encrypt = (toEncrypt) => {
         config.iv = createIV();
         const cipher = crypto.createCipheriv(config.cryptoAlgo, config.cryptoKey, config.iv);
+        // Note: Template literal here is safe - concatenating crypto cipher outputs, not SQL/user input
         return `${cipher.update(toEncrypt, "utf8", "hex")} ${cipher.final("hex")}`;
     };
 
     const decrypt = (toDecrypt) => {
         const decipher = crypto.createDecipheriv(config.cryptoAlgo, config.cryptoKey, config.iv);
+        // Note: Template literal here is safe - concatenating crypto decipher outputs, not SQL/user input
         return `${decipher.update(toDecrypt, "hex", "utf8")} ${decipher.final("utf8")}`;
     };
     */
