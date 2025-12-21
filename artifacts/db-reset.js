@@ -40,6 +40,7 @@ const tryDropCollection = (db, name) => {
     return new Promise((resolve, reject) => {
         db.dropCollection(name, (err, data) => {
             if (!err) {
+                // Note: Template literal here is safe - used for logging only, not in database queries
                 console.log(`Dropped collection: ${name}`);
             }
             resolve(undefined);
